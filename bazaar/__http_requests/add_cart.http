@@ -1,0 +1,27 @@
+#POST http://localhost:8000/events/add-cart/Z0001/
+POST https://shs.losa.cz/events/add-cart/Z0002/
+Accept: application/json
+Authorization: Token 1bdd79b833660282050a9453678e74f5b3d0ca0d
+
+[
+{
+"seller":15,
+"price":50
+},
+{
+"seller":7,
+"price":120
+},
+{
+"seller":73,
+"price":75
+},
+{
+"seller":26,
+"price":200
+},
+{
+"seller":57,
+"price":150
+}
+]

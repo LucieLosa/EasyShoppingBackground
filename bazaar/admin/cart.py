@@ -6,11 +6,10 @@ from bazaar.models import Cart, Item
 
 class ItemInlineAdmin(admin.TabularInline):
     model = Item
-    fields = ("user_identifier","price",)
-    readonly_fields = ("user_identifier",)
+    fields = ("event_seller","price",)
 
-    def user_identifier(self, obj):
-        return obj.event_seller.identifier
+    # def user_identifier(self, obj):
+    #     return obj.event_seller.identifier
 
     def get_queryset(self, request):
         return super().get_queryset(request).select_related(

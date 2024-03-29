@@ -25,9 +25,9 @@ class Seller(BaseModel):
     x_user = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
-        return f"{self.nickname}"
+        return f"{self.default_identifier} - {self.nickname}"
 
     class Meta:
-        ordering = ["nickname"]
+        ordering = ["default_identifier", "nickname"]
         verbose_name = _("Seller")
         verbose_name_plural = _("Sellers")

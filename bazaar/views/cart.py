@@ -40,8 +40,7 @@ class AddCart(APIView):
                 Item.objects.create(
                     cart=cart,
                     event_seller=event_seller,
-                    price=req_item.get("price"),
-                    size=req_item.get("size")
+                    price=req_item.get("price")
                 )
             except Exception as e:
                 errors.append(str(e))
