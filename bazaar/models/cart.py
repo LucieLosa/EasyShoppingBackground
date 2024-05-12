@@ -3,7 +3,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils.translation import gettext as _
 
@@ -14,8 +14,8 @@ from .event import Event, EventSeller
 class Cart(BaseModel):
     id = models.UUIDField(primary_key=True, auto_created=True, default=uuid.uuid4, editable=False)
     identifier = models.CharField(max_length=128, verbose_name=_("Name"))
-    event = models.ForeignKey(Event, on_delete=models.PROTECT, verbose_name=_("bazaar"))
-    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="carts_user")
+    event = models.ForeignKey(Event, on_delete=models.PROTECT, verbose_name=_("Event"))
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="carts_user", verbose_name=_("User"))
     is_checked = models.BooleanField(verbose_name=_("Cart checked"), default=False)
 
     x_created = models.DateTimeField(auto_now=True, editable=False, verbose_name=_("Created"))
@@ -27,6 +27,7 @@ class Cart(BaseModel):
 
     def items_count(self):
         return self.items.count()
+    items_count.short_description = _("Items count")
 
     def total_price(self):
         return self.items.aggregate(summary=Sum("price")).get('summary')
@@ -43,9 +44,11 @@ class Cart(BaseModel):
 class Item(BaseModel):
     id = models.UUIDField(primary_key=True, auto_created=True, default=uuid.uuid4, editable=False)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name=_("Cart"), related_name="items")
-    event_seller = models.ForeignKey(EventSeller, on_delete=models.PROTECT, related_name="event_seller")
+    event_seller = models.ForeignKey(
+        EventSeller, on_delete=models.PROTECT, related_name="event_seller", verbose_name=_("Seller"))
     size = models.CharField(max_length=32, verbose_name=_("Size"), null=True, blank=True)
     price = models.PositiveSmallIntegerField(verbose_name=_("Price"), default=0)
+    order = models.PositiveSmallIntegerField(verbose_name=_("Order"), default=0)
     x_created = models.DateTimeField(auto_now=True, editable=False, verbose_name=_("Created"))
     x_modified = models.DateTimeField(auto_now=True)
     x_user = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -59,17 +62,17 @@ class Item(BaseModel):
         verbose_name_plural = _("Items")
 
 
+@receiver(pre_save, sender=Item)
+def on_change(sender, **kwargs):
+    instance = kwargs.get("instance")
+    if instance.id:
+        previous = Item.objects.get(id=instance.id)
+        if previous.event_seller != instance.event_seller:
+            previous.event_seller.count_totals(exclude_item_pk=previous.pk)
+
+
 @receiver(post_save, sender=Item)
 def my_handler(sender, **kwargs):
     item = kwargs.get("instance")
     if item.event_seller:
-        total_sales_amount = Item.objects.filter(event_seller=item.event_seller).aggregate(
-            Sum('price'))['price__sum']
-        total_sold_items = Item.objects.filter(event_seller=item.event_seller).count()
-        item.event_seller.total_sales_amount = total_sales_amount
-        item.event_seller.total_sold_items = total_sold_items
-        if not item.event_seller.is_no_fees:
-            item.event_seller.total_fees = (
-                                                   item.event_seller.event.fee_value_percentage / 100 * total_sales_amount
-                                           ) + item.event_seller.event.fee_value_default
-        item.event_seller.save(update_fields=["total_fees", "total_sales_amount", "total_sold_items"])
+        item.event_seller.count_totals()

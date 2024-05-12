@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import gettext as _
 
 
 class BaseModel(models.Model):
@@ -14,3 +15,8 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class EashoUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="easho_user")
+    prefix = models.CharField(_("Prefix"), max_length=8, blank=True)

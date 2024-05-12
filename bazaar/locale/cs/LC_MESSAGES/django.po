@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-16 22:18+0200\n"
-"PO-Revision-Date: 2023-10-16 22:44+0200\n"
+"POT-Creation-Date: 2024-05-12 17:07+0200\n"
+"PO-Revision-Date: 2024-05-12 17:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: cs\n"
@@ -18,140 +18,189 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 3.4\n"
 
-#: .\bazaar\models\cart.py:16 .\bazaar\models\seller.py:13
-msgid "Name"
-msgstr "Název"
+#: .\admin\cart.py:32 .\models\cart.py:18
+msgid "User"
+msgstr "Uživatel"
 
-#: .\bazaar\models\cart.py:17
-msgid "bazaar"
-msgstr ""
+#: .\admin\cart.py:78
+msgid "Checked"
+msgstr "Zkontrolováno"
 
-#: .\bazaar\models\cart.py:20 .\bazaar\models\cart.py:41
-#: .\bazaar\models\event.py:22 .\bazaar\models\event.py:39
-#: .\bazaar\models\event.py:63 .\bazaar\models\seller.py:21
-msgid "Created"
-msgstr "Vytvořeno"
-
-#: .\bazaar\models\cart.py:30 .\bazaar\models\cart.py:36
-msgid "Cart"
-msgstr "Košík"
-
-#: .\bazaar\models\cart.py:31
-msgid "Carts"
-msgstr "Košíky"
-
-#: .\bazaar\models\cart.py:39
-msgid "Size"
-msgstr "Velikost"
-
-#: .\bazaar\models\cart.py:40
-msgid "Price"
-msgstr "Cena"
-
-#: .\bazaar\models\cart.py:50
-msgid "Item"
-msgstr "Položka"
-
-#: .\bazaar\models\cart.py:51
-msgid "Items"
-msgstr "Položky"
-
-#: .\bazaar\models\event.py:13
-msgid "name"
-msgstr "název"
-
-#: .\bazaar\models\event.py:14
-msgid "date"
-msgstr "datum"
-
-#: .\bazaar\models\event.py:15 .\bazaar\models\seller.py:18
-msgid "Active"
-msgstr "Aktivní"
-
-#: .\bazaar\models\event.py:16
-msgid "Closed"
-msgstr "Zavřeno"
-
-#: .\bazaar\models\event.py:17 .\bazaar\models\seller.py:16
-msgid "Notes"
-msgstr "Poznámky"
-
-#: .\bazaar\models\event.py:18
-msgid "Static fee value default"
-msgstr "Pevné poplatky výchozí hodnota"
-
-#: .\bazaar\models\event.py:19
-msgid "Percentage fee value default"
-msgstr "Procentuální poplatky výchozí hodnota"
-
-#: .\bazaar\models\event.py:30
+#: .\admin\cart.py:81 .\models\cart.py:17 .\models\event.py:32
+#: .\models\event.py:57
 msgid "Event"
 msgstr "Událost"
 
-#: .\bazaar\models\event.py:31
-msgid "Events"
-msgstr "Události"
-
-#: .\bazaar\models\event.py:49
-msgid "Event user"
-msgstr "Událost - Uživatel"
-
-#: .\bazaar\models\event.py:50
-msgid "Event users"
-msgstr "Událost - uživatelé"
-
-#: .\bazaar\models\event.py:57
-msgid "Seller identifier"
-msgstr "Identifikátor prodejce"
-
-#: .\bazaar\models\event.py:58
-msgid "No fees"
-msgstr "Bez poplatků"
-
-#: .\bazaar\models\event.py:59
-msgid "Total sold items"
-msgstr "Počet prodaných položek"
-
-#: .\bazaar\models\event.py:60
-msgid "Total sales amount"
-msgstr "Celková hodnota prodeje"
-
-#: .\bazaar\models\event.py:61
-msgid "Total Fees"
-msgstr "Poplatky celkem"
-
-#: .\bazaar\models\event.py:73
-msgid "Event seller"
-msgstr "Událost - prodejce"
-
-#: .\bazaar\models\event.py:74
-msgid "Event sellers"
-msgstr "Událost - prodejci"
-
-#: .\bazaar\models\seller.py:12
-msgid "Unique nickname - quick find"
-msgstr "Uživatelské jméno"
-
-#: .\bazaar\models\seller.py:14
-msgid "Email"
-msgstr "Email"
-
-#: .\bazaar\models\seller.py:15
-msgid "Phone"
-msgstr "Telefon"
-
-#: .\bazaar\models\seller.py:17
-msgid "Seller number (default setting)"
-msgstr "Číslo prodejce (výchozí nastavení)"
-
-#: .\bazaar\models\seller.py:19
-msgid "No fees (default setting)"
-msgstr "Bez poplatků (výchozí nastavení)"
-
-#: .\bazaar\models\seller.py:30
+#: .\admin\cart.py:87 .\models\cart.py:48 .\models\event.py:58
+#: .\models\seller.py:32
 msgid "Seller"
 msgstr "Prodejce"
 
-#: .\bazaar\models\seller.py:31
+#: .\admin\event.py:68
+msgid "Number"
+msgstr "Číslo"
+
+#: .\admin\event.py:68 .\models\cart.py:16 .\models\seller.py:15
+msgid "Name"
+msgstr "Název"
+
+#: .\admin\event.py:68
+msgid "Totally earned"
+msgstr "Celkem utrženo"
+
+#: .\admin\event.py:68
+msgid "To payout"
+msgstr "K vyplacení"
+
+#: .\admin\event.py:68
+msgid "Sold items"
+msgstr "Prodané položky"
+
+#: .\admin\event.py:80
+msgid "Export event sellers"
+msgstr "Export prodejců"
+
+#: .\models\base.py:22
+msgid "Prefix"
+msgstr ""
+
+#: .\models\cart.py:19
+msgid "Cart checked"
+msgstr "Košík zkontrolován"
+
+#: .\models\cart.py:21 .\models\cart.py:52 .\models\event.py:24
+#: .\models\event.py:41 .\models\event.py:65 .\models\seller.py:23
+msgid "Created"
+msgstr "Vytvořeno"
+
+#: .\models\cart.py:30
+msgid "Items count"
+msgstr "Počet položek"
+
+#: .\models\cart.py:35
+msgid "Sum"
+msgstr "Součet"
+
+#: .\models\cart.py:40 .\models\cart.py:46
+msgid "Cart"
+msgstr "Košík"
+
+#: .\models\cart.py:41
+msgid "Carts"
+msgstr "Košíky"
+
+#: .\models\cart.py:49
+msgid "Size"
+msgstr "Velikost"
+
+#: .\models\cart.py:50
+msgid "Price"
+msgstr "Cena"
+
+#: .\models\cart.py:51
+msgid "Order"
+msgstr "Pořadí"
+
+#: .\models\cart.py:61
+msgid "Item"
+msgstr "Položka"
+
+#: .\models\cart.py:62
+msgid "Items"
+msgstr "Položky"
+
+#: .\models\event.py:14
+msgid "name"
+msgstr "název"
+
+#: .\models\event.py:15
+msgid "short name"
+msgstr "přezdívka"
+
+#: .\models\event.py:16
+msgid "date"
+msgstr "datum"
+
+#: .\models\event.py:17 .\models\seller.py:20
+msgid "Active"
+msgstr "Aktivní"
+
+#: .\models\event.py:18
+msgid "Closed"
+msgstr "Zavřeno"
+
+#: .\models\event.py:19 .\models\seller.py:18
+msgid "Notes"
+msgstr "Poznámky"
+
+#: .\models\event.py:20
+msgid "Static fee value default"
+msgstr "Pevné poplatky výchozí hodnota"
+
+#: .\models\event.py:21
+msgid "Percentage fee value default"
+msgstr "Procentuální poplatky výchozí hodnota"
+
+#: .\models\event.py:33
+msgid "Events"
+msgstr "Události"
+
+#: .\models\event.py:51
+msgid "Event user"
+msgstr "Událost - Uživatel"
+
+#: .\models\event.py:52
+msgid "Event users"
+msgstr "Událost - uživatelé"
+
+#: .\models\event.py:59
+msgid "Seller identifier"
+msgstr "Identifikátor prodejce"
+
+#: .\models\event.py:60
+msgid "No fees"
+msgstr "Bez poplatků"
+
+#: .\models\event.py:61
+msgid "Total sold items"
+msgstr "Počet prodaných položek"
+
+#: .\models\event.py:62
+msgid "Total sales amount"
+msgstr "Celková hodnota prodeje"
+
+#: .\models\event.py:63
+msgid "Total Fees"
+msgstr "Poplatky celkem"
+
+#: .\models\event.py:75
+msgid "Event seller"
+msgstr "Událost - prodejce"
+
+#: .\models\event.py:76
+msgid "Event sellers"
+msgstr "Událost - prodejci"
+
+#: .\models\seller.py:14
+msgid "Unique nickname - quick find"
+msgstr "Uživatelské jméno"
+
+#: .\models\seller.py:16
+msgid "Email"
+msgstr "Email"
+
+#: .\models\seller.py:17
+msgid "Phone"
+msgstr "Telefon"
+
+#: .\models\seller.py:19
+msgid "Seller number (default setting)"
+msgstr "Číslo prodejce (výchozí nastavení)"
+
+#: .\models\seller.py:21
+msgid "No fees (default setting)"
+msgstr "Bez poplatků (výchozí nastavení)"
+
+#: .\models\seller.py:33
 msgid "Sellers"
 msgstr "Prodejci"

@@ -1,27 +1,33 @@
-#POST http://localhost:8000/events/add-cart/Z0001/
-POST https://shs.losa.cz/events/add-cart/Z0002/
+POST http://localhost:8000/events/add-cart/Y0005/
+#POST https://shs.losa.cz/events/add-cart/Z0002/
+#POST https://bazarek.webh.cz/events/add-cart/Z0002/
 Accept: application/json
 Authorization: Token 1bdd79b833660282050a9453678e74f5b3d0ca0d
 
 [
 {
 "seller":15,
+"order": 1,
 "price":50
 },
 {
 "seller":7,
+"order": 2,
 "price":120
 },
 {
 "seller":73,
+"order": 3,
 "price":75
 },
 {
 "seller":26,
+"order": 4,
 "price":200
 },
 {
 "seller":57,
+"order": 5,
 "price":150
 }
 ]
