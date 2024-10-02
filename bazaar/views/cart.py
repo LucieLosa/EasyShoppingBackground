@@ -35,7 +35,6 @@ class AddCart(APIView):
             return Response({'status': "Integrity ERROR"})
 
         errors = []
-        items = []
         for req_item in request.data:
             try:
                 seller_identifier = req_item.get("seller")
@@ -44,16 +43,15 @@ class AddCart(APIView):
                 except EventSeller.DoesNotExist:
                     event_seller = EventSeller.create_if_not_found(seller_identifier, event)
 
-                items.append(Item(
+                Item.objects.create(
                     cart=cart,
                     event_seller=event_seller,
                     order=(req_item.get("order") or 0),
                     price=req_item.get("price"),
                     x_user=x_user
-                ))
+                )
             except Exception as e:
                 errors.append(str(e))
-        Item.objects.bulk_create(items)
         if errors:
             return Response({'status': ",".join(errors)})
 

@@ -3,7 +3,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save, post_delete
 from django.dispatch import receiver
 from django.utils.translation import gettext as _
 
@@ -27,6 +27,7 @@ class Cart(BaseModel):
 
     def items_count(self):
         return self.items.count()
+
     items_count.short_description = _("Items count")
 
     def total_price(self):
@@ -66,9 +67,15 @@ class Item(BaseModel):
 def on_change(sender, **kwargs):
     instance = kwargs.get("instance")
     if instance.id:
-        previous = Item.objects.get(id=instance.id)
-        if previous.event_seller != instance.event_seller:
+        previous = Item.objects.filter(id=instance.id).first()
+        # if the seller in relation was changed, there is also necessary to recalculate the previous ones
+        if previous and previous.event_seller != instance.event_seller:
             previous.event_seller.count_totals(exclude_item_pk=previous.pk)
+
+
+@receiver(post_delete, sender=Item)
+def signal_function_name(sender, instance, using, **kwargs):
+    instance.event_seller.count_totals()
 
 
 @receiver(post_save, sender=Item)

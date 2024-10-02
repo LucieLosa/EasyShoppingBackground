@@ -86,13 +86,15 @@ class EventSeller(BaseModel):
     def count_totals(self, exclude_item_pk=None):
         from bazaar.models import Item
         total_sales_amount = Item.objects.filter(event_seller=self).exclude(pk=exclude_item_pk).aggregate(
-            Sum('price'))['price__sum']
+            Sum('price'))['price__sum'] or 0
         total_sold_items = Item.objects.filter(event_seller=self).exclude(pk=exclude_item_pk).count()
         self.total_sales_amount = total_sales_amount
         self.total_sold_items = total_sold_items
         if not self.is_no_fees:
-            self.total_fees = (round(self.event.fee_value_percentage / 100 * total_sales_amount)
-                               ) + self.event.fee_value_default
+            total_fees = (round(self.event.fee_value_percentage / 100 * total_sales_amount)
+                          ) + self.event.fee_value_default
+            self.total_fees = total_fees if total_sales_amount > 100 else 0
+
         self.save(update_fields=["total_fees", "total_sales_amount", "total_sold_items"])
 
     @property
